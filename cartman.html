@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Giggles online version</title>
+    <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+    <style type="text/css">
+    body{
+      background-image:url("bgimage.jpg");
+      background-repeat: no-repeat;
+      background-size: 1280px, 960px;
+    }
+
+    input#transcript{
+      border: none;
+      font-family: "Gill Sans", sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      background-color: transparent;
+      color: #373c44;
+      padding-top: 460px;
+      width: 230px;
+    }
+    
+    div#canvasDiv{
+      padding-top: 330px;
+      padding-left: 0px;
+
+    }
+
+    #chatbox{
+      padding-left: 150px;
+      padding-top: 15px;
+    }
+
+    #tips{
+      vertical-align: top;
+    }
+
+    /* Popup container */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    font-family: "Gill Sans", sans-serif;
+    font-size: 18px;
+    text-decoration: underline;
+    color: #eee36f;
+    padding-left: 120px;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    left: 0%;
+    margin-top: 5px;
+    font-family: "Gill Sans", sans-serif;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+    font-family: "Gill Sans", sans-serif;
+      font-size: 12px;
+      line-height: 18px;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+    </style>
+  </head>
+  <body class="wholebody">
+
+    <!-- Search Form -->
+    <form id="labnol" method="get" action="https://www.google.com/search">
+      <div class="speech">
+        <table>
+          <tr>
+            <td width="680px"></td>
+            <td>
+              <div id="canvasDiv" >
+              </div>
+            </td>
+            <td id="chatbox" width="880px">
+              <input type="text" name="q" id="transcript" placeholder="" />
+              <img id="microphone" onclick="startDictation()" width="20px" height="20px" src="images/microphone.png" />
+            </td>
+            <td id="tips" width="200px">
+              <div class="popup" onclick="myFunction()">Hints
+              <span class="popuptext" id="myPopup">Say Hi<br>tell jokes<br>ask about election<br>laugh with him</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </form>
+
+
+    <script type="text/javascript" src="nonverbal.js"></script>
+    <script type="text/javascript" src="verbal.js"></script>
+    <script type="text/javascript">
+      // When the user clicks on <div>, open the popup
+      function myFunction() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+      }
+    </script>
+    <script type="text/javascript">
+    	prepareCanvas(document.getElementById("canvasDiv"), 200, 300);
+		  document.getElementById("canvasDiv").onmousedown = function() { 
+			 jump(); 
+      }
+      document.getElementById("canvasDiv").onmousemove = function() { 
+       tickle(); 
+      }
+       document.getElementById("canvasDiv").onmouseout = function() { 
+       unfocus(); 
+      }
+      document.getElementById("microphone").onmousedown = function() { 
+       record(); 
+      }
+      setInterval(remind, 8000);
+    </script>
+    
+  </body>
+</html>
